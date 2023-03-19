@@ -6,10 +6,13 @@ public class AhsanAhnafA4Q1 {
     static int sizeX;
     static int sizeY;
     static String[][] board;
+    static int wordCount = 0;
 
     public static void main(String args[]) {
         sizeSetter();
         boardDrawer();
+        boardPrinter(board);
+        userStringInput();
         boardPrinter(board);
     }
 
@@ -35,7 +38,6 @@ public class AhsanAhnafA4Q1 {
         } else {
             System.out.println("Both X and Y need to be odd!");
         }
-        input.close();
     }
 
     public static void boardDrawer() {
@@ -85,7 +87,26 @@ public class AhsanAhnafA4Q1 {
                 }
             }
         }
-
     }
 
+    public static String userString() {
+        Scanner swag = new Scanner(System.in);
+        String x = swag.nextLine();
+        x = x.stripTrailing();
+        x = x.toLowerCase();
+        return x;
+    }
+
+    public static void userStringInput() {
+        System.out.println("Input word!:");
+        String word = userString();
+        int length = word.length();
+        if (length <= sizeX && wordCount == 0) {
+            int counter = 0;
+            for (int i = ((sizeX) / 2) - (length / 2); i < sizeX && counter < length; i++) {
+                board[sizeY / 2][i] = String.valueOf(word.charAt(counter));
+                counter++;
+            }
+        }
+    }
 }
