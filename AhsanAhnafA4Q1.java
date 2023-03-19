@@ -1,5 +1,7 @@
 
 // EACH MINI STEP is one function, no more messy code! 
+import java.nio.charset.Charset;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class AhsanAhnafA4Q1 {
@@ -7,13 +9,30 @@ public class AhsanAhnafA4Q1 {
     static int sizeY;
     static String[][] board;
     static int wordCount = 0;
+    static final int[] LETTER_SCORES = new int[] {
+            1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10
+    };
+    static HashMap<String, Integer> HASH_SCORES = new HashMap<String, Integer>(); // hash map of the scores
 
     public static void main(String args[]) {
+        hashMapSetter();
         sizeSetter();
         boardDrawer();
         boardPrinter(board);
         userStringInput();
         boardPrinter(board);
+    }
+
+    // I was too lazy to set the hashmap manually, so I just made a forloop that
+    // initializes the ASCII for letter a and loops setting the key as letter and
+    // value as the score.
+    public static void hashMapSetter() {
+        int letter = 97;
+        for (int i = 0; i < LETTER_SCORES.length; i++) {
+            String chars = String.valueOf((char) letter);
+            HASH_SCORES.put(chars, LETTER_SCORES[i]);
+            letter++;
+        }
     }
 
     public static void boardPrinter(String[][] board) {
