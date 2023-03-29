@@ -1,4 +1,16 @@
-
+/**
+ * AhsanAhnafA3Q3
+ *
+ * COMP 1020 SECTION A01
+ * INSTRUCTOR    Josaine Kroll
+ * ASSIGNMENT    Assignment 4, question 1 
+ * @author       Ahnaf Ahsan, 7966487
+ * @version      29-3-23
+ *
+ * Scorable. My algorithms are fine, but one thing that messes up is that my code 
+ * gets the highest score across the board, which might be harder to code but does not follow the questions requirements.
+ * 
+ */
 // EACH MINI STEP is one function, no more messy code! 
 import java.lang.reflect.Array;
 import java.nio.charset.Charset;
@@ -46,6 +58,9 @@ public class AhsanAhnafA4Q1 {
             System.out.println();
         }
     }
+    /**
+ * sets the global sizes, so sizeX and sizeY can be set to be used.
+ */
 
     public static void sizeSetter() {
         Scanner input = new Scanner(System.in);
@@ -61,6 +76,9 @@ public class AhsanAhnafA4Q1 {
             System.out.println("Both X and Y need to be odd!");
         }
     }
+    /**
+ * Draws the board and places out the subsequent double scores and other bonus locations using pure logic and math.
+ */
 
     public static void boardDrawer() {
         // lets make the board frame
@@ -111,6 +129,10 @@ public class AhsanAhnafA4Q1 {
         }
     }
 
+    /**
+ * Calls hash scores to get the score of each leter.
+ */
+
     public static int scoreCalc(char letter) {
         return HASH_SCORES.get(letter);
     }
@@ -128,7 +150,7 @@ public class AhsanAhnafA4Q1 {
         boolean keepPlaying = true;
 
         while (keepPlaying) {
-            System.out.println("Input word or type 'exit' to end the game:");
+            System.out.println("Input word or type exit");
             String word = swag.nextLine();
             word = word.stripTrailing();
             word = word.toLowerCase();
@@ -141,13 +163,16 @@ public class AhsanAhnafA4Q1 {
                     wordCount++;
                     boardPrinter(board);
                 } else {
-                    // Place subsequent words and update the score
+                    // place future words and update the score
                     placeSubsequentWords(word);
                     boardPrinter(board);
                 }
             }
         }
     }
+    /**
+ * PURPOSE: Basic forloop, just uses basic conditions and places the word biased towards the left.
+ */
 
     public static void placeFirstWordOnBoard(String word) {
         int length = word.length();
@@ -178,14 +203,17 @@ public class AhsanAhnafA4Q1 {
         System.out.println("Score for this word: " + score);
     }
 
+    /**
+ * PURPOSE: 
+ */
     public static void placeSubsequentWords(String word) {
         ArrayList<ValidPlacement> valid_placements = new ArrayList<>();
 
         for (int i = 0; i < sizeY; i++) {
             for (int j = 0; j < sizeX; j++) {
                 if (!board[i][j].equals(".")) {
-                    if (j + word.length() <= sizeX && (j == 0 || board[i][j - 1].equals("."))
-                            && (j + word.length() == sizeX || board[i][j + word.length()].equals("."))) {
+                    if ((j + word.length() <= sizeX && (j == 0 || board[i][j - 1].equals("."))
+                            && (j + word.length() == sizeX || board[i][j + word.length()].equals(".")))) {
                         int score = horizontalPlacement(word, board, i, j);
                         valid_placements.add(new ValidPlacement(i, j, true, score));
                     }
